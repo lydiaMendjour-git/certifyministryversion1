@@ -1,0 +1,27 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+model Diploma {
+  id            Int     @id @default(autoincrement()) // Identifiant unique pour chaque diplôme
+  diplomaHash   String  @unique // Utilisé pour identifier de manière unique chaque diplôme
+  etablissement String // Nom de l'établissement qui a délivré le diplôme
+  studentName   String // Nom de l'étudiant
+  birthDate     String // Date de naissance de l'étudiant
+  diplomaTitle  String // Titre du diplôme
+  diplomaType   String // Type du diplôme (par exemple "Licence", "Master", etc.)
+  dateOfIssue   String // Date de délivrance du diplôme
+  speciality    String // Spécialité du diplôme (par exemple "Informatique", "Médecine", etc.)
+  complete      Boolean @default(false) // Statut de validation du diplôme
+}
